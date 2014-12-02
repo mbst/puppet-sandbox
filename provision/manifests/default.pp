@@ -10,7 +10,11 @@ class { 'vagrant': stage => 'pre' }
 
 class { 'puppet': }
 class { 'networking': }
+class { 'custom_facts': }
 
 if $hostname == 'puppet' {
   class { 'puppet::server': }
+} else {
+  class { 'puppet::client': }
 }
+

@@ -50,6 +50,7 @@ should be good to clone this repo and go:
     precise64
     $ git clone git://github.com/elasticdog/puppet-sandbox.git
     $ cd puppet-sandbox/
+    $ export PUPPET_ROOT=/path/to/local/puppet/config/checkout
 
 If you want a CentOS base box to work from, I highly recommend the boxes
 published by Jan Vansteenkiste: http://packages.vstone.eu/vagrant-boxes/
@@ -71,8 +72,8 @@ The following tasks will be handled automatically:
 4. All client certificate requests will be automatically signed by the master
    server.
 5. The master server will utilize the `nodes.pp` file and `modules/` directory
-   that exist **outside of the VMs** (in your puppet-sandbox Git working
-   directory) by utilizing VirtualBox's shared folder feature.
+   referenced by the `PUPPET_ROOT` environment variable **outside of the VMs**
+   by utilizing VirtualBox's shared folder feature.
 
 All of this is handled using Vagrant's provisioning capabilities and is
 controlled by the manifests under the `provision/` directory. In theory, you
@@ -90,8 +91,7 @@ Developing New Modules
 ----------------------
 
 To start developing a new Puppet module, just create the standard module
-structure under `modules/` in your puppet-sandbox Git working directory (an
-example "helloworld" module should exist there already). This directory is
+structure under `modules/` in your Puppet configuration. This directory is
 automatically in the Puppet master server's _modulepath_, and any changes will
 be picked up immediately.
 
@@ -119,7 +119,7 @@ the agent daemon, you can easily force a manual run:
 License
 =======
 
-Puppet Sandbox is provided under the terms of [The MIT
-License](http://www.opensource.org/licenses/MIT).
+This project is forked from Puppet Sandbox, which is provided under the terms 
+of [The MIT License](http://www.opensource.org/licenses/MIT) and is Copyright 
+&copy; 2012, [Aaron Bull Schaefer](mailto:aaron@elasticdog.com).
 
-Copyright &copy; 2012, [Aaron Bull Schaefer](mailto:aaron@elasticdog.com).

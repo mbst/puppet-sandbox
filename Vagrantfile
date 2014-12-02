@@ -9,8 +9,14 @@ puppet_nodes = [
   {:hostname => 'client2', :ip => '172.16.32.12', :box => 'precise64'},
 ]
 
+if !ENV['PUPPET_ROOT']
+  puts " You must set the PUPPET_ROOT environment variable to your puppet configuration direcrtory"
+  exit
+end
+
 Vagrant.configure("2") do |config|
   puppet_nodes.each do |node|
+    config.vm.synced_folder ENV['PUPPET_ROOT'], "/puppet"
     config.vm.define node[:hostname] do |node_config|
       node_config.vm.box = node[:box]
       node_config.vm.box_url = 'http://files.vagrantup.com/' + node_config.vm.box + '.box'
@@ -37,3 +43,4 @@ Vagrant.configure("2") do |config|
     end
   end
 end
+
